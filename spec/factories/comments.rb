@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :comment do
+  	association :topic
     content "MyText"
-topic nil
   end
 
 end
