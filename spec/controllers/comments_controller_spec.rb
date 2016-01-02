@@ -2,36 +2,39 @@ require 'rails_helper'
 
 RSpec.describe CommentsController, type: :controller do
 	describe 'POST #create' do
+		let(:valid_attributes) { attributes_for(:comment) }
+		let(:invalid_attributes) { attributes_for(:comment, content: nil) }
+
+		before(:each) do
+			@topic = create(:topic)
+		end
+
 		context 'with valid attributes' do
 			it 'saves a comment in the database' do
-				topic = create(:topic)
 				expect {
-					post :create, topic_id: topic,
-						comment: attributes_for(:comment)
+					post :create, topic_id: @topic,
+						comment: valid_attributes
 					}.to change(Comment, :count).by(1)
 			end
 
 			it 'redirects to notes#show' do
-				topic = create(:topic)
-				post :create, topic_id: topic,
-					comment: attributes_for(:comment)
-				expect(response).to redirect_to(topic)
+				post :create, topic_id: @topic,
+					comment: valid_attributes
+				expect(response).to redirect_to(@topic)
 			end
 		end
 
 		context 'with invalid attributes' do
 			it 'does not save a comment in the database' do
-				topic = create(:topic)
 				expect {
-					post :create, topic_id: topic,
-						comment: attributes_for(:comment, content: nil)
+					post :create, topic_id: @topic,
+						comment: invalid_attributes
 					}.to change(Comment, :count).by(0)
 			end
 
 			it 're-renders the notes#show template' do
-				topic = create(:topic)
-				post :create, topic_id: topic,
-					comment: attributes_for(:comment, content: nil)
+				post :create, topic_id: @topic,
+					comment: invalid_attributes
 				expect(response).to render_template('topics/show')
 			end
 		end

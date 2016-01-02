@@ -1,8 +1,9 @@
 class CommentsController < ApplicationController
 
 	def create
-		@topic = Topic.find(params[:topic_id])
-		@comment = @topic.comments.build(comment_params)
+		load_topic
+		build_comment
+
 		if @comment.save
 			redirect_to @topic
 		else
@@ -11,7 +12,16 @@ class CommentsController < ApplicationController
 	end
 
 	private
-		def comment_params
-			params.require(:comment).permit(:content)
-		end
+
+	def load_topic
+		@topic = Topic.find(params[:topic_id])
+	end
+
+	def build_comment
+		@comment = @topic.comments.build(comment_params)
+	end
+
+	def comment_params
+		params.require(:comment).permit(:content)
+	end
 end
