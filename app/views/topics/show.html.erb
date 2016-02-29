@@ -1,0 +1,15 @@
+<h2><%= @topic.subject %></h2>
+
+<p><%= @topic.body %></p>
+
+<table class="table">
+	<tbody>
+	<% @topic.comments.each do |comment| %>
+		<tr>
+			<td><%= comment.content %></td>
+		</tr>
+	<% end %>
+	</tbody>
+</table>
+
+<%= link_to 'Back', category_path(@topic.category_id), class: 'btn btn-danger' %>

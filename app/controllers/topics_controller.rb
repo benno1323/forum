@@ -9,14 +9,16 @@ class TopicsController < ApplicationController
 	end
 
 	def new
-		@topic = Topic.new
+		find_category
+		@topic = @category.topics.build
 	end
 
 	def edit
 	end
 
 	def create
-		@topic = Topic.new(topic_params)
+		find_category
+		@topic = @category.topics.build(topic_params)
 
 		if @topic.save
 			redirect_to @topic
@@ -26,6 +28,7 @@ class TopicsController < ApplicationController
 	end
 
 	def update
+		find_category
 		if @topic.update(topic_params)
 			redirect_to @topic
 		else
@@ -46,5 +49,9 @@ class TopicsController < ApplicationController
 
 	def topic_params
 		params.require(:topic).permit(:subject, :body)
+	end
+
+	def find_category
+		@category = Category.find(params[:category_id])
 	end
 end

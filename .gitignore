@@ -14,3 +14,8 @@
 
 # Ignore .env file
 .env
+
+# Ignore DS_Store
+.DS_Store
+
+.byebug_history

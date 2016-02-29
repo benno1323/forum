@@ -5,3 +5,20 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Comment.destroy_all
+Topic.destroy_all
+Category.destroy_all
+
+5.times do |i|
+	cat = Category.create(name: "Category #{i}")
+
+	2.times do |j|
+		topic = cat.topics.build(subject: "Subject #{j}", body: "This is topic #{j}")
+		topic.save
+		3.times do |k|
+			comment = topic.comments.build(content: "This is comment #{k}")
+			comment.save
+		end
+	end
+end

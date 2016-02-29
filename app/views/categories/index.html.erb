@@ -1,0 +1,19 @@
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>Category</th>
+			<th>Latest</th>
+			<th>Topics</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @categories.each do |cat| %>
+		<tr>
+			<td><%= link_to cat.name, category_path(cat) %></td>
+			<td><%= cat.topics.last.body %></td>
+			<td><%= cat.topics.count %></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
