@@ -12,12 +12,12 @@ RSpec.describe TopicsController, type: :controller do
 
 	describe 'GET #index' do
 		it 'renders the index template' do
-			get :index
+			get :index, category_id: @topic.category_id
 			expect(response).to render_template(:index)
 		end
 
 		it 'assigns a list of topics' do
-			get :index
+			get :index, category_id: @topic.category_id
 			expect(assigns(:topics)).to eq([@topic])
 		end
 	end
@@ -48,12 +48,12 @@ RSpec.describe TopicsController, type: :controller do
 
 	describe 'GET #new' do
 		it 'renders the new template' do
-			get :new
+			get :new, category_id: @topic.category_id
 			expect(response).to render_template(:new)
 		end
 
 		it 'assigns a new topic' do
-			get :new
+			get :new, category_id: @topic.category_id
 			expect(assigns(:topic)).to be_a_new(Topic)
 		end
 	end
@@ -63,19 +63,19 @@ RSpec.describe TopicsController, type: :controller do
 
 			it 'saves a new topic to the database' do
 				expect {
-					post :create, topic: valid_attributes
+					post :create, topic: valid_attributes, category_id: @topic.category_id
 				}.to change(Topic, :count).by(1)
 			end
 
 			it 'redirects to the show view' do
-				post :create, topic: valid_attributes
+				post :create, topic: valid_attributes, category_id: @topic.category_id
 				expect(response).to redirect_to(assigns(:topic))
 			end
 		end
 
 		context 'with invalid attributes' do
 			it 're-renders the new template' do
-				post :create, topic: invalid_attributes
+				post :create, topic: invalid_attributes, category_id: @topic.category_id
 				expect(response).to render_template(:new)
 			end
 		end
@@ -84,12 +84,12 @@ RSpec.describe TopicsController, type: :controller do
 	describe 'PATCH #update' do
 		context 'with valid attributes' do
 			it 'finds a topic in the database' do
-				get :edit, id: @topic
+				get :edit, id: @topic, category_id: @topic.category_id
 				expect(assigns(:topic)).to eq(@topic)
 			end
 
 			it 'updates a topic in the database' do
-				patch :update, id: @topic,
+				patch :update, id: @topic, category_id: @topic.category_id,
 					topic: updated_attributes
 				@topic.reload
 				expect(assigns(:topic).subject).to eq('Updated subject')
@@ -97,7 +97,7 @@ RSpec.describe TopicsController, type: :controller do
 			end
 
 			it 'redirects to the show view' do
-				patch :update, id: @topic,
+				patch :update, id: @topic, category_id: @topic.category_id,
 					topic: updated_attributes
 				expect(response).to redirect_to(assigns(:topic))
 			end
@@ -105,7 +105,7 @@ RSpec.describe TopicsController, type: :controller do
 
 		context 'with invalid attributes' do
 			it 'does not change a topic attributes' do
-				patch :update, id: @topic,
+				patch :update, id: @topic, category_id: @topic.category_id,
 					topic: invalid_attributes
 				@topic.reload
 				expect(@topic.subject).to_not eq('Updated subject')
@@ -113,7 +113,7 @@ RSpec.describe TopicsController, type: :controller do
 			end
 
 			it 're-renders the edit template' do
-				patch :update, id: @topic,
+				patch :update, id: @topic, category_id: @topic.category_id,
 					topic: invalid_attributes
 				expect(response).to render_template(:edit)
 			end
