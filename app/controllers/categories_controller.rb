@@ -6,6 +6,8 @@ class CategoriesController < ApplicationController
 	end
 
 	def show
+		@category = Category.find(params[:id])
+		@topics = @category.topics.order(created_at: :desc)
 	end
 
 	def new
