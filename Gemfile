@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'devise'
 gem 'bootstrap-sass'
 gem 'dotenv-rails'
 gem 'rails', '4.2.4'
