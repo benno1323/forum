@@ -20,4 +20,10 @@ RSpec.describe Topic, type: :model do
   	@topic.valid?
   	expect(@topic.errors[:body]).to include("can't be blank")
   end
+
+  it 'is not valid withou a user_id' do
+    @topic.user_id = nil
+    @topic.valid?
+    expect(@topic.errors[:user_id]).to include("can't be blank")
+  end
 end
