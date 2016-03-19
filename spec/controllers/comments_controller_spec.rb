@@ -7,6 +7,8 @@ RSpec.describe CommentsController, type: :controller do
 
 		before(:each) do
 			@topic = create(:topic)
+			@user = create(:user)
+			sign_in @user
 		end
 
 		context 'with valid attributes' do
