@@ -7,6 +7,8 @@ RSpec.describe CategoriesController, type: :controller do
 
 	before(:each) do
 		@category = create(:category)
+		@user = create(:user)
+		sign_in @user
 	end
 
 	describe 'GET #index' do
