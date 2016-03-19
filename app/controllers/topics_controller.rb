@@ -19,6 +19,7 @@ class TopicsController < ApplicationController
 	def create
 		find_category
 		@topic = @category.topics.build(topic_params)
+		@topic.user = current_user
 
 		if @topic.save
 			redirect_to @topic
