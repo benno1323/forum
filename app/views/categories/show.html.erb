@@ -4,6 +4,7 @@
 	<thead>
 		<tr>
 			<th>Topic</th>
+			<th>Users</th>
 			<th>Replies</th>
 		</tr>
 	</thead>
@@ -11,6 +12,7 @@
 		<% @topics.each do |topic| %>
 		<tr>
 			<td><%= link_to topic.subject, topic_path(topic) %></td>
+			<td><%= topic.user.email %></td>
 			<td><%= topic.comments.count %></td>
 		</tr>
 		<% end %>
