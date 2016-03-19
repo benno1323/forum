@@ -8,6 +8,8 @@ RSpec.describe TopicsController, type: :controller do
 
 	before(:each) do
 		@topic = create(:topic)
+		@user = create(:user)
+		sign_in @user
 	end
 
 	describe 'GET #index' do
