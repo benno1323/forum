@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
 	def create
 		load_topic
 		build_comment
+		@comment.user = current_user
 
 		if @comment.save
 			redirect_to @topic
