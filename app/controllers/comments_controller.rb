@@ -3,7 +3,6 @@ class CommentsController < ApplicationController
 	def create
 		load_topic
 		build_comment
-		@comment.user = current_user
 
 		if @comment.save
 			redirect_to @topic
@@ -20,6 +19,7 @@ class CommentsController < ApplicationController
 
 	def build_comment
 		@comment = @topic.comments.build(comment_params)
+		@comment.user = current_user
 	end
 
 	def comment_params
