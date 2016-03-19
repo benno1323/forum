@@ -12,4 +12,7 @@
 	</tbody>
 </table>
 
+
+<%= render 'comments/form' if user_signed_in? %>
+<br><br>
 <%= link_to 'Back', category_path(@topic.category_id), class: 'btn btn-danger' %>
