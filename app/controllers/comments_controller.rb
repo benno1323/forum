@@ -1,26 +1,17 @@
 class CommentsController < ApplicationController
 
 	def create
-		load_topic
-		build_comment
+		@comment = Topic.build_topic_comment(params, comment_params)
+		@comment.user = current_user
 
 		if @comment.save
-			redirect_to @topic
+			redirect_to topic_path(@comment.topic_id)
 		else
-			render 'topics/show'
+			render 'topics/show', notice: "Content can't be blank"
 		end
 	end
 
 	private
-
-	def load_topic
-		@topic = Topic.find(params[:topic_id])
-	end
-
-	def build_comment
-		@comment = @topic.comments.build(comment_params)
-		@comment.user = current_user
-	end
 
 	def comment_params
 		params.require(:comment).permit(:content)

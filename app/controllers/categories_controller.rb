@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-	before_action :set_category, only: [:show, :edit, :update, :destroy]
+	before_action :find_category, only: [:show, :edit, :update, :destroy]
 	before_action :authenticate_user!, except: [:index, :show]
 
 	def index
@@ -7,8 +7,7 @@ class CategoriesController < ApplicationController
 	end
 
 	def show
-		@category = Category.find(params[:id])
-		@topics = @category.topics.order(created_at: :desc)
+		@topics = Category.find_topics_desc(params)
 	end
 
 	def new
@@ -43,8 +42,8 @@ class CategoriesController < ApplicationController
 
 	private
 
-	def set_category
-		@category = Category.find(params[:id])
+	def find_category
+		@category = Category.find_by_id(params)
 	end
 
 	def category_params

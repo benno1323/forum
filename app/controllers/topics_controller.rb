@@ -1,5 +1,6 @@
 class TopicsController < ApplicationController
-	before_action :set_topic, only: [:show, :edit, :update, :destroy]
+	before_action :find_topic, only: [:show, :edit, :update, :destroy]
+	before_action :find_category, only: [:new, :create, :update]
 	before_action :authenticate_user!, except: [:show]
 
 	def index
@@ -11,7 +12,6 @@ class TopicsController < ApplicationController
 	end
 
 	def new
-		find_category
 		@topic = @category.topics.build
 	end
 
@@ -19,8 +19,7 @@ class TopicsController < ApplicationController
 	end
 
 	def create
-		find_category
-		@topic = @category.topics.build(topic_params)
+		@topic = Category.build_category_topic(params, topic_params)
 		@topic.user = current_user
 
 		if @topic.save
@@ -31,7 +30,6 @@ class TopicsController < ApplicationController
 	end
 
 	def update
-		find_category
 		if @topic.update(topic_params)
 			redirect_to @topic
 		else
@@ -46,8 +44,8 @@ class TopicsController < ApplicationController
 
 	private
 
-	def set_topic
-		@topic = Topic.find(params[:id])
+	def find_topic
+		@topic = Topic.find_by_id(params)
 	end
 
 	def topic_params
@@ -55,6 +53,6 @@ class TopicsController < ApplicationController
 	end
 
 	def find_category
-		@category = Category.find(params[:category_id])
+		@category = Category.find_by_id(params)
 	end
 end
