@@ -1,18 +1,25 @@
-<h2><%= @topic.subject %></h2>
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<%= @topic.subject %> by <%= @topic.user.email %>
+	</div>
+	<div class="panel-body">
+		<%= @topic.body %>
+	</div>
+</div>
 
-<p><%= @topic.body %></p>
-
-<table class="table">
-	<tbody>
-	<% @topic.comments.each do |comment| %>
-		<tr>
-			<td><%= comment.content %></td>
-		</tr>
-	<% end %>
-	</tbody>
-</table>
-
-
+<hr>
 <%= render 'comments/form' if user_signed_in? %>
-<br><br>
+<hr>
+
+<% @topic.comments.each do |comment| %>
+<% if comment.persisted? %>
+<div class="panel panel-default">
+	<div class="panel-heading"><%= comment.user.email %></div>
+	<div class="panel-body">
+		<%= comment.content %>
+	</div>
+</div>
+<% end %>
+<% end %>
+
 <%= link_to 'Back', category_path(@topic.category_id), class: 'btn btn-danger' %>
