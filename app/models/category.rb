@@ -12,9 +12,8 @@ class Category < ActiveRecord::Base
 		end
 	end
 
-	def self.find_topics_desc(params)
-		@category = find_by_id(params)
-		@category.topics.order(created_at: :desc)
+	def self.load_topics_desc(category)
+		category.topics.order(created_at: :desc)
 	end
 
 	def self.build_category_topic(params, topic_params)

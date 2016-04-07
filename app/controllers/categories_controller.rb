@@ -7,7 +7,7 @@ class CategoriesController < ApplicationController
 	end
 
 	def show
-		@topics = Category.find_topics_desc(params)
+		@topics = Category.load_topics_desc(@category)
 	end
 
 	def new

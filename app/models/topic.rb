@@ -18,4 +18,8 @@ class Topic < ActiveRecord::Base
 		@topic = Topic.find_by_id(params)
 		@topic.comments.build(comment_params)
 	end
+
+	def self.load_comments(topic)
+		topic.comments.build
+	end
 end
