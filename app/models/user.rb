@@ -4,7 +4,13 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :comments
+
   enum role: [:member, :moderator, :admin]
 
-  has_many :comments
+  before_save :set_default_role
+
+  def set_default_role
+  	self.role ||= 0
+  end
 end
