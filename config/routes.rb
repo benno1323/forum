@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get '', to: 'dashboard#index', as: '/'
 
-    resources :categories
+    resources :categories, :topics
   end
 
   resources :topics do
