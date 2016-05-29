@@ -5,6 +5,10 @@ class Admin::CategoriesController < Admin::BaseController
 		@categories = Category.all
 	end
 
+	def show
+		@topics = Category.load_topics_desc(@category)
+	end
+
 	def new
 		@category = Category.new
 	end
