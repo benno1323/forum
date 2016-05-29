@@ -1,0 +1,22 @@
+<%= link_to('New Topic', new_category_topic_path(@category), class: 'btn btn-success') %>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>Topic</th>
+			<th>Users</th>
+			<th>Replies</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @topics.each do |topic| %>
+		<tr>
+			<td><%= link_to topic.subject, topic_path(topic) %></td>
+			<td><%= topic.user.email %></td>
+			<td><%= topic.comments.count %></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<%= link_to 'Back', admin_categories_path, class: 'btn btn-danger' %>
