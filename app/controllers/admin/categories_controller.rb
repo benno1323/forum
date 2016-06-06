@@ -15,6 +15,7 @@ class Admin::CategoriesController < Admin::BaseController
 
 	def create
 		@category = Category.new(categories_params)
+		@category.user = current_user
 
 		if @category.save
 			redirect_to admin_categories_path, notice: 'Category created successfully!'

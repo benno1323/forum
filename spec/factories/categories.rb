@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :category do
+    association :user
     name "MyString"
 
     factory :category_with_topics do
