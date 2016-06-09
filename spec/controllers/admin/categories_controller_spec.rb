@@ -99,5 +99,57 @@ RSpec.describe Admin::CategoriesController, type: :controller do
 				end
 			end
 		end
+
+		describe 'PATCH #update' do
+			context 'with valid attributes' do
+				it 'finds a category in the database' do
+					get :edit, id: @category
+					expect(assigns(:category)).to eq(@category)
+				end
+
+				it 'updates a category' do
+					patch :update, id: @category, category: updated_attributes
+					@category.reload
+					expect(assigns(:category).name).to eq('Updated name')
+				end
+
+				it 'redirects to admin categories path' do
+					patch :update, id: @category, category: updated_attributes
+					expect(response).to redirect_to(admin_categories_path)
+				end
+			end
+
+			context 'with invalid attributes' do
+				it 'does not update a category' do
+					patch :update, id: @category, category: invalid_attributes
+					@category.reload
+					expect(assigns(:category).name).to_not eq('Updated name')
+				end
+
+				it 're-renders the edit template' do
+					patch :update, id: @category, category: invalid_attributes
+					@category.reload
+					expect(response).to render_template(:edit)
+				end
+			end
+		end
+
+		describe 'DELETE #destroy' do
+			it 'finds a category in the database' do
+				delete :destroy, id: @category
+				expect(assigns(:category)).to eq(@category)
+			end
+
+			it 'deletes a category from the database' do
+				expect {
+					delete :destroy, id: @category
+				}.to change(Category, :count).by(-1)
+			end
+
+			it 'redirects to admin categories path' do
+				delete :destroy, id: @category
+				expect(response).to redirect_to(admin_categories_path)
+			end
+		end
 	end
 end
