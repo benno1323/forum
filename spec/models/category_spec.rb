@@ -19,4 +19,10 @@ RSpec.describe Category, type: :model do
   	category = create(:category_with_topics)
   	expect(category.topics.count).to eq(5)
   end
+
+  it 'is invalid withou a user id' do
+    @category.user_id = nil
+    @category.valid?
+    expect(@category.errors[:user_id]).to include("can't be blank")
+  end
 end
