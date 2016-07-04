@@ -1,4 +1,4 @@
-<% form_form([:admin, @category, @topic]) do |f| %>
+<%= form_for([:admin, @category, @topic]) do |f| %>
 	<div class="form-group">
 		<%= f.label :subject %>
 		<%= f.text_field :subject, class: 'form-control' %>
@@ -8,4 +8,11 @@
 		<%= f.label :body %>
 		<%= f.text_area :body, class: 'form-control' %>
 	</div>
+
+	<div class="form-group">
+		<%= f.select(:category_id, options_for_select(@topic_options, selected: @topic.category_id), {}, { class: 'form-control' }) %>
+	</div>
+
+	<%= f.submit class: 'btn btn-submit' %>
+
 <% end %>
