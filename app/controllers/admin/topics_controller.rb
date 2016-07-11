@@ -1,11 +1,11 @@
 class Admin::TopicsController < Admin::BaseController
 
 	def index
-		@topics = Topic.all
+		@topics = Topic.all.includes(:user)
 	end
 
 	def show
-		@topic = Topic.find_by_id(params)
+		@topic = Topic.includes(comments: :user).find(params[:id])
 	end
 
 	def new
@@ -25,8 +25,8 @@ class Admin::TopicsController < Admin::BaseController
 	end
 
 	def edit
-		@topic = Topic.find_by_id(params)
-		@topic_options = Topic.all.collect { |topic| [ topic.category.name, topic.category_id ] }.uniq
+		@topic = Topic.includes(:category).find(params[:id])
+		@topic_options = Topic.all.includes(:category).collect { |topic| [ topic.category.name, topic.category_id ] }.uniq
 	end
 
 	def update
