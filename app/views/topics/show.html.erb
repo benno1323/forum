@@ -11,7 +11,7 @@
 <%= render 'comments/form' if user_signed_in? %>
 <hr>
 
-<% @topic.comments.each do |comment| %>
+<% @comments.each do |comment| %>
 <% if comment.persisted? %>
 <div class="panel panel-default">
 	<div class="panel-heading"><%= comment.user.email %></div>

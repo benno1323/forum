@@ -8,7 +8,8 @@ class TopicsController < ApplicationController
 	end
 
 	def show
-		@comment = Topic.load_comments(@topic)
+		@comments = Topic.load_comments(@topic)
+		@comment = @topic.comments.build
 	end
 
 	def new

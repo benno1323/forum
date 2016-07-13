@@ -20,6 +20,6 @@ class Topic < ActiveRecord::Base
 	end
 
 	def self.load_comments(topic)
-		Topic.includes(comments: :user).find(topic).comments.build
+		Topic.includes(comments: :user).find(topic).comments.descending
 	end
 end
