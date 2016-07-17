@@ -93,7 +93,7 @@ RSpec.describe Admin::TopicsController, type: :controller do
 			context 'with invalid attributes' do
 				it 'does not update a topic' do
 					patch :update, id: @topic, topic: invalid_attributes
-					expect(@topic.id).to_not eq(nil)
+					expect(@topic.category_id).to_not eq(nil)
 				end
 
 				it 're-renders the edit template' do
