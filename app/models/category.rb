@@ -14,7 +14,7 @@ class Category < ActiveRecord::Base
 	end
 
 	def self.load_topics_desc(category)
-		Category.includes(topics: :user).find(category).topics
+		Category.includes(topics: :user).find(category.id).topics
 	end
 
 	def self.build_category_topic(params, topic_params)
