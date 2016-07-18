@@ -36,3 +36,9 @@
 .navbar-header > .navbar-brand:hover {
 	color: whitesmoke;
 }
+
+@media (max-width: 979px) {
+  body {
+    padding-top: 60px;
+  }
+}
