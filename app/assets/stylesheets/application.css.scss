@@ -37,6 +37,7 @@
 	color: whitesmoke;
 }
 
+// Clear navbar on width of 979px or less
 @media (max-width: 979px) {
   body {
     padding-top: 60px;
