@@ -1,6 +1,6 @@
 class Admin::CommentsController < Admin::BaseController
 	def index
-		@comments = Comment.all
+		@comments = Comment.all.includes(:topic, :user).descending
 	end
 
 	def show
@@ -13,6 +13,7 @@ class Admin::CommentsController < Admin::BaseController
 
 	def edit
 		@comment = Comment.find(params[:id])
+		@comment_options = Comment.all.includes(:topic).collect { |comment| [ comment.topic.subject, comment.topic_id ] }.uniq
 	end
 
 	def create
