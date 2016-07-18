@@ -1,0 +1,8 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+  	<img src="http://cdn-wpmsa.defymedia.com/wp-content/uploads/sites/3/2014/06/Daenerys-Targaryen.jpg" class="img-circle" height="42" width="42" alt="Daenerys Targaryen"> by <span><%= @comment.user.email %> on <%= @comment.created_at %></span>
+  </div>
+  <div class="panel-body">
+    <%= @comment.content %>
+  </div>
+</div>

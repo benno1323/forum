@@ -1,0 +1,32 @@
+<div class="row">
+	<div class="col-lg-6">
+		<h2>Comments</h2>
+		<%= link_to 'New Comment', new_admin_comment_path %>
+
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>From</th>
+						<th>Topic</th>
+						<th>Comment</th>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @comments.each do |comment| %>
+					<tr>
+						<td><%= comment.user.email %></td>
+						<td><%= link_to comment.topic.subject, admin_topic_path(comment.topic_id) %></td>
+						<td><%= link_to comment.content, admin_comment_path(comment) %></td>
+						<td><%= link_to 'Edit', edit_admin_comment_path(comment) %></td>
+						<td><%= link_to 'Destroy', admin_comment_path(comment), method: :delete, data: { confirm:
+							'Are you sure?'} %></td>
+						</tr>
+						<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
